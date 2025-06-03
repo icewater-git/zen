@@ -21,22 +21,22 @@
   <meta name="author" content="冰珠">
   <meta name="keywords" content="冰水, 冰珠, 小提琴, 摄影, 简历">
   
-    <meta name="description" content="完全可以不更换 NS，只需添加一条 CNAME 记录，即可完成域名绑定，保持 Cloudflare 的 DNS 灵活性和安全性。">
+    <meta name="description" content="曾为一纸履历开，今朝随缘任君来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 Cloudflare 配置 Netlify 自定义域名（无需更换 NS）">
-<meta property="og:url" content="https://hey.ice68.cn/2025/06/04/2025-06-04_net/index.html">
+<meta property="og:title" content="☁️云端再起：网站搬家小记">
+<meta property="og:url" content="https://hey.ice68.cn/2025/06/04/2025-06-04_net_0/index.html">
 <meta property="og:site_name" content="小艺术家">
-<meta property="og:description" content="完全可以不更换 NS，只需添加一条 CNAME 记录，即可完成域名绑定，保持 Cloudflare 的 DNS 灵活性和安全性。">
+<meta property="og:description" content="曾为一纸履历开，今朝随缘任君来">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-04T06:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-03T16:15:14.744Z">
+<meta property="article:modified_time" content="2025-06-03T16:55:24.139Z">
 <meta property="article:author" content="冰珠">
 <meta property="article:tag" content="冰水, 冰珠, 小提琴, 摄影, 简历">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>使用 Cloudflare 配置 Netlify 自定义域名（无需更换 NS） - 小艺术家</title>
+  <title>☁️云端再起：网站搬家小记 - 小艺术家</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="使用 Cloudflare 配置 Netlify 自定义域名（无需更换 NS）"></span>
+            <span id="subtitle" data-typed-text="☁️云端再起：网站搬家小记"></span>
           
         </div>
 
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          561 字
+          975 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          5 分钟
+          9 分钟
         
       </span>
     
@@ -273,79 +273,52 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">使用 Cloudflare 配置 Netlify 自定义域名（无需更换 NS）</h1>
+            <h1 id="seo-header">☁️云端再起：网站搬家小记</h1>
             
             
               <div class="markdown-body">
                 
                 <p>　　（未经授权，禁止转载）</p>
-<p>　　在使用 Netlify 托管静态网站时，很多人会遇到「需要将域名的 NS（Name Server）切换到 Netlify」的提示。但对于已经使用 Cloudflare 管理 DNS 的用户来说，<strong>完全可以不更换 NS，只需添加一条 CNAME 记录</strong>，即可完成域名绑定，保持 Cloudflare 的 DNS 灵活性和安全性。</p>
-<p>　　本教程将手把手教你如何完成这一配置。</p>
+<h2 id="🏠-从一台老电脑开始"><a href="#🏠-从一台老电脑开始" class="headerlink" title="🏠 从一台老电脑开始"></a>🏠 从一台老电脑开始</h2><p>　　最初建立这个网站，只是为了写简历。</p>
+<p>　　那时候的我，在家里的一台台式机上部署了一切——服务器、数据库、页面、图片……全部运行在一块普通硬盘上，无人值守，日夜转动。没有防火墙，没有专业设备，只靠着一份热情在维持着它的存在。</p>
+<p>　　这份“家用自托管”的勇气，在现实中也面临了诸多考验。</p>
 <hr>
-<h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><ul>
-<li>已在 <a target="_blank" rel="noopener" href="https://www.netlify.com/">Netlify</a> 上部署好一个站点。</li>
-<li>域名已接入 <a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare</a> 并可管理 DNS。</li>
-<li>已知你在 Netlify 的站点地址，例如：<code>ice.netlify.app</code>。</li>
-</ul>
+<h2 id="⚠️-停电、断网与一次深夜攻击"><a href="#⚠️-停电、断网与一次深夜攻击" class="headerlink" title="⚠️ 停电、断网与一次深夜攻击"></a>⚠️ 停电、断网与一次深夜攻击</h2><p>　　北方的冬天尤其艰难。所在区域偏远，电力与网络的稳定性无法保障。</p>
+<p>　　停电，一停就是一整天，有时甚至两天。</p>
+<p>　　为此我还买了UPS备用电源，但真正面对持续断电时，这些都显得力不从心。</p>
+<p>　　最严重的一次是在今年二月。那天深夜，网站突然无法访问。回家一查，发现电脑被黑客远程加了密码。原本裸奔的系统，最终被入侵成了一台失控的机器。性能骤降，端口被封，我只能紧急断开外网、清除残余数据。这场事故，像是一次警钟，让我重新思考安全与稳定的意义。</p>
 <hr>
-<h2 id="二、在-Netlify-添加自定义域名"><a href="#二、在-Netlify-添加自定义域名" class="headerlink" title="二、在 Netlify 添加自定义域名"></a>二、在 Netlify 添加自定义域名</h2><ol>
-<li>登录 <a target="_blank" rel="noopener" href="https://app.netlify.com/">Netlify 控制台</a>。</li>
-<li>进入你的网站项目。</li>
-<li>点击左侧菜单中的「Domain settings」。</li>
-<li>点击「Add custom domain」。</li>
-<li>输入你要绑定的域名，例如：<code>hey.ice68.cn</code>，点击「Verify」。</li>
-<li>此时会提示你添加一个 <code>netlify-challenge</code> 的 TXT 记录用于验证所有权，<strong>暂时不用理会，直接添加 CNAME 记录即可</strong>。</li>
-</ol>
-<hr>
-<h2 id="三、在-Cloudflare-添加-DNS-记录"><a href="#三、在-Cloudflare-添加-DNS-记录" class="headerlink" title="三、在 Cloudflare 添加 DNS 记录"></a>三、在 Cloudflare 添加 DNS 记录</h2><ol>
-<li><p>登录 <a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare 控制面板</a>。</p>
-</li>
-<li><p>选择你的域名（例如 <code>ice68.cn</code>）。</p>
-</li>
-<li><p>点击左侧导航中的「DNS」。</p>
-</li>
-<li><p>点击「添加记录（Add record）」。</p>
-</li>
-<li><p>填写以下内容：</p>
+<h2 id="📦-搬迁上云：告别家中服务器"><a href="#📦-搬迁上云：告别家中服务器" class="headerlink" title="📦 搬迁上云：告别家中服务器"></a>📦 搬迁上云：告别家中服务器</h2><p>　　在决定网站上云的那个晚上，我其实已经在打包生活。</p>
+<p>　　因为个人计划的改变，我将彻底<strong>搬离现在的住所，返回成都生活</strong>。这也意味着：</p>
 <ul>
-<li><strong>类型（Type）</strong>：<code>CNAME</code></li>
-<li><strong>名称（Name）</strong>：<code>hey</code>（即子域名 <code>hey.ice68.cn</code>）</li>
-<li><strong>目标（Target）</strong>：<code>ice.netlify.app</code>（你的 Netlify 子域名）</li>
-<li><strong>代理状态</strong>：关闭（显示灰色云朵，即「DNS only」）</li>
+<li>家里的网络将销户，服务器将被断电</li>
+<li>搬家途中无法保障任何维护</li>
+<li>网站如果仍然依赖本地设备，将彻底中断</li>
 </ul>
-</li>
-<li><p>保存记录。</p>
-</li>
-</ol>
-<h3 id="可选：添加验证-TXT-记录（如果-Netlify-要求验证所有权）"><a href="#可选：添加验证-TXT-记录（如果-Netlify-要求验证所有权）" class="headerlink" title="可选：添加验证 TXT 记录（如果 Netlify 要求验证所有权）"></a>可选：添加验证 TXT 记录（如果 Netlify 要求验证所有权）</h3><ul>
-<li><strong>类型</strong>：<code>TXT</code></li>
-<li><strong>名称</strong>：<code>netlify-challenge</code></li>
-<li><strong>内容</strong>：Netlify 提供的值，例如 <code>dfsgdfshgrsf</code></li>
-</ul>
+<p>　　于是，在离开之前，我花了几个夜晚，<strong>将整个网站彻底迁移到了云端服务器</strong>。</p>
+<p>　　过程并不轻松。从最初的DNS配置，到域名解析、SSL加密，再到部署环境的重建，每一步都伴随着试错与查询。尤其是当我把注册商和服务商混淆的时候，一度卡在了域名验证这一步。</p>
+<p>　　TXT记录、CNAME、Nginx配置，这些陌生名词，如今都变成了我操作过的选项。</p>
+<p>　　但也正因如此，这次搬迁的每一步，都显得尤其扎实和难得。</p>
 <hr>
-<h2 id="四、等待-DNS-生效并验证"><a href="#四、等待-DNS-生效并验证" class="headerlink" title="四、等待 DNS 生效并验证"></a>四、等待 DNS 生效并验证</h2><ul>
-<li><p>DNS 生效时间通常在几分钟到一小时之间。</p>
-</li>
-<li><p>你可以使用在线工具（如 <a target="_blank" rel="noopener" href="https://toolbox.googleapps.com/apps/dig/">Google DIG 工具</a>）检查：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">dig hey<span class="hljs-selector-class">.ice68</span><span class="hljs-selector-class">.cn</span> CNAME<br></code></pre></td></tr></table></figure></li>
-<li><p>或在终端使用：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nslookup -<span class="hljs-built_in">type</span>=CNAME hey.ice68.cn<br></code></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h2 id="五、返回-Netlify-完成验证"><a href="#五、返回-Netlify-完成验证" class="headerlink" title="五、返回 Netlify 完成验证"></a>五、返回 Netlify 完成验证</h2><ul>
-<li>回到 Netlify，点击「Verify DNS configuration」按钮。</li>
-<li>如果 CNAME 记录生效，Netlify 会显示绑定成功。</li>
-<li>之后你可以启用 HTTPS（自动配置 SSL&#x2F;TLS 证书）。</li>
-</ul>
-<hr>
-<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>使用 Cloudflare 管理 DNS 而不更换 NS，有如下优点：</p>
+<h2 id="🌐-云端之后：更稳定、更安全"><a href="#🌐-云端之后：更稳定、更安全" class="headerlink" title="🌐 云端之后：更稳定、更安全"></a>🌐 云端之后：更稳定、更安全</h2><p>　　网站迁移至云端后，将具备如下优势：</p>
 <ul>
-<li>保留 Cloudflare 的 DDoS 防护与缓存服务。</li>
-<li>更灵活地添加自定义记录（如 MX、TXT 等）。</li>
-<li>避免因更换 NS 导致原有配置失效。</li>
+<li>24小时持续在线，断电、断网问题不再出现</li>
+<li>安全性提升，系统更加隔离，避免家庭网络受影响</li>
+<li>可持续维护，即使我搬家换城，也不影响正常访问</li>
 </ul>
-<p>　　只需添加一条 CNAME 记录，就可以顺利将你的自定义域名绑定到 Netlify，省事又安全！</p>
+<p>　　这一改变，对我个人而言，是从“试验型作品”迈向“持续型项目”的转折。</p>
 <hr>
+<h2 id="✍️-初衷未改：写简历的起点"><a href="#✍️-初衷未改：写简历的起点" class="headerlink" title="✍️ 初衷未改：写简历的起点"></a>✍️ 初衷未改：写简历的起点</h2><blockquote>
+<p><strong>“曾为一纸履历开，今朝随缘任君来。”</strong></p>
+</blockquote>
+<p>　　最初的愿望并不高远，只是想在简历里写上一句“个人网站链接”。如今，这个曾经为了一纸履历搭建的小站，正慢慢变成我记录生活与分享创作的所在。</p>
+<p>　　我从不是什么专业程序员，学技术只是为了表达。未来，这里依旧会分享我的艺术作品、摄影心得、还有一些未竟的心愿。网站的形式在变，初衷未曾离开。</p>
+<hr>
+<h2 id="🔐-未来可期：仍在路上的我"><a href="#🔐-未来可期：仍在路上的我" class="headerlink" title="🔐 未来可期：仍在路上的我"></a>🔐 未来可期：仍在路上的我</h2><p>　　当然，云端也不是终点。</p>
+<p>　　网站的安全问题、加密传输、数据备份、攻击防护……仍有许多需要继续研究和打磨。可这一次，我愿意一步步来。</p>
+<p>　　感谢曾经访问过这个网站的人，哪怕只是短暂停留。如今它脱离了家中的电线与插座，开始在更高更远的地方运行，欢迎你，随时再来看看。</p>
+<hr>
+<p>🙏 <strong>感谢阅读，本次搬迁圆满结束！</strong></p>
 <p>　　（未经授权，禁止转载）</p>
 
                 
@@ -364,8 +337,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>使用 Cloudflare 配置 Netlify 自定义域名（无需更换 NS）</div>
-      <div>https://hey.ice68.cn/2025/06/04/2025-06-04_net/</div>
+      <div>☁️云端再起：网站搬家小记</div>
+      <div>https://hey.ice68.cn/2025/06/04/2025-06-04_net_0/</div>
     </div>
     <div class="license-meta">
       
@@ -409,18 +382,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/04/2025-06-04_net_0/" title="☁️云端再起：网站搬家小记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">☁️云端再起：网站搬家小记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/30/Quiet_Day/" title="文殊院・日记">
-                        <span class="hidden-mobile">文殊院・日记</span>
+                      <a href="/2025/06/04/2025-06-04_net/" title="使用 Cloudflare 配置 Netlify 自定义域名（无需更换 NS）">
+                        <span class="hidden-mobile">使用 Cloudflare 配置 Netlify 自定义域名（无需更换 NS）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
