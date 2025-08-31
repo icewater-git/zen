@@ -19,7 +19,7 @@ h4 {
 /* 针对电脑端放大字体 */
 @media screen and (min-width: 768px) {
   body {
-    font-size: 18px;
+    font-size: 24px;
   }
   h1 {
     font-size: 32px;
