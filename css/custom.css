@@ -1,82 +1,97 @@
 /*--put your own style sheet here--*/
-/* ===== 全局字体设置 ===== */
-body,
-.post-content,
-.article-entry {
-  font-size: 18px; /* 正文字号 */
-  line-height: 1.85; /* 行高 */
+/* ===== Hexo-Lx 主题：Markdown 正文字体和排版优化 ===== */
+/* 文章正文 */
+.post-body {
+  font-size: 18px !important; /* 正文字号 */
+  line-height: 1.85 !important; /* 行距舒适 */
   font-weight: 400; /* 正文字体粗细 */
-  color: #333; /* 深灰色，更易阅读 */
+  color: #333; /* 深灰色，更柔和 */
 }
-/* ===== 标题 ===== */
-.post-content h1,
-.article-entry h1 {
+/* 段落 */
+.post-body p {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-indent: 2em; /* 首行缩进 */
+}
+/* 标题 */
+.post-body h1 {
   font-size: 2.2em;
   font-weight: 700;
   line-height: 1.3;
   margin: 1.5em 0 0.8em;
 }
-.post-content h2,
-.article-entry h2 {
+.post-body h2 {
   font-size: 1.8em;
   font-weight: 600;
   line-height: 1.35;
   margin: 1.3em 0 0.7em;
 }
-.post-content h3,
-.article-entry h3 {
+.post-body h3 {
   font-size: 1.5em;
   font-weight: 600;
   line-height: 1.4;
   margin: 1.1em 0 0.6em;
 }
-/* ===== 段落 ===== */
-.post-content p,
-.article-entry p {
-  margin: 1em 0;
+.post-body h4,
+.post-body h5,
+.post-body h6 {
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1em 0 0.5em;
 }
-/* ===== 列表 ===== */
-.post-content ul,
-.article-entry ul,
-.post-content ol,
-.article-entry ol {
+/* 列表 */
+.post-body ul,
+.post-body ol {
   margin: 1em 0;
   padding-left: 1.5em;
   line-height: 1.85;
 }
-/* ===== 代码块 ===== */
-.post-content code,
-.post-content pre,
-.article-entry code,
-.article-entry pre {
-  font-size: 16px;
+/* 引用块 */
+.post-body blockquote {
+  padding-left: 1em;
+  border-left: 4px solid #ccc;
+  color: #555;
+  margin: 1em 0;
+}
+.post-body blockquote > p {
+  text-indent: 0;
+}
+/* 序号列表首行缩进 */
+.post-body ol > li > p {
+  text-indent: 0;
+}
+/* 代码块 */
+.post-body code,
+.post-body pre {
+  font-size: 16px !important;
   line-height: 1.65;
   font-family: "Fira Code", monospace;
+  background-color: #f5f5f5;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
 }
-/* ===== 手机端适配 ===== */
+/* 链接 */
+.post-body a {
+  color: #6495ed;
+  text-decoration: underline;
+}
+/* 手机端适配 */
 @media screen and (max-width: 768px) {
-  body,
-  .post-content,
-  .article-entry {
-    font-size: 17px;
-    line-height: 1.8;
+  .post-body {
+    font-size: 17px !important;
+    line-height: 1.8 !important;
   }
-  .post-content h1,
-  .article-entry h1 {
+  .post-body h1 {
     font-size: 2em;
   }
-  .post-content h2,
-  .article-entry h2 {
+  .post-body h2 {
     font-size: 1.7em;
   }
-  .post-content h3,
-  .article-entry h3 {
+  .post-body h3 {
     font-size: 1.5em;
   }
-  .post-content code,
-  .post-content pre,
-  .article-entry code,
-  .article-entry pre {
-    font-size: 15px;
+  .post-body code,
+  .post-body pre {
+    font-size: 15px !important;
   }
 }
