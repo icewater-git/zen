@@ -19,7 +19,7 @@ h4 {
 /* 针对电脑端放大字体 */
 @media screen and (min-width: 768px) {
   body {
-    font-size: 24px;
+    font-size: 18px;
   }
   h1 {
     font-size: 32px;
@@ -32,5 +32,42 @@ h4 {
   }
   h4 {
     font-size: 20px;
+  }
+}
+/* 文章正文字体 */
+.lx-post {
+  font-size: 18px;
+  line-height: 1.8;
+}
+/* 标题 */
+.lx-post h1 {
+  font-size: 32px;
+}
+.lx-post h2 {
+  font-size: 28px;
+}
+.lx-post h3 {
+  font-size: 24px;
+}
+.lx-post h4 {
+  font-size: 20px;
+}
+/* 响应式电脑端 */
+@media screen and (min-width: 768px) {
+  .lx-post {
+    font-size: 26px;
+    line-height: 1.9;
+  }
+  .lx-post h1 {
+    font-size: 36px;
+  }
+  .lx-post h2 {
+    font-size: 32px;
+  }
+  .lx-post h3 {
+    font-size: 28px;
+  }
+  .lx-post h4 {
+    font-size: 24px;
   }
 }
