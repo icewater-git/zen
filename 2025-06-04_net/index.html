@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><!-- hexo injector head_begin start -->
+<link rel="stylesheet" href="/css/bilicard.css">
+<!-- hexo injector head_begin end -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+  <title>使用 Cloudflare 配置 Netlify 自定义域名（无需更换 NS） | 茶花花</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="小冰同学">
+  <meta name="keywords" content="修学, 静心禅院">
+  <meta name="description" content="记录修学中的点滴">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'hexo-theme-lx-0.4.4',
+    version: '0.4.4',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'null'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/css/main.min.css">
+  
+  <style type="text/css">
+    pre,
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+    html {
+      font-family: sans-serif;
+    }
+    body {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, figure {
+      font-family: sans-serif;
+    }
+    .menu-container{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.jside.menu.min.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "",
+	     });
+	}); 
+	</script>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+<div class="single">
+
+<div id="page">
+<div class="header">
+  <div id="lx-aside" style="background-image: url(https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/post_cover.min.jpeg)" data-stellar-background-ratio="0.5">
+    <div class="overlay">
+      
+      <div class="page-title">
+        <div class="avatar"><a href="/"><img src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/avatar.min.jpeg" alt="小冰同学"></a></div>
+        <span>2025-06-04</span>
+        <h2>使用 Cloudflar...</h2>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>　　（未经授权，禁止转载）</p>
+<p>　　在使用 Netlify 托管静态网站时，很多人会遇到「需要将域名的 NS（Name Server）切换到 Netlify」的提示。但对于已经使用 Cloudflare 管理 DNS 的用户来说，<strong>完全可以不更换 NS，只需添加一条 CNAME 记录</strong>，即可完成域名绑定，保持 Cloudflare 的 DNS 灵活性和安全性。</p>
+<p>　　本教程将手把手教你如何完成这一配置。</p>
+<hr>
+<h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><ul>
+<li>已在 <a target="_blank" rel="noopener" href="https://www.netlify.com/">Netlify</a> 上部署好一个站点。</li>
+<li>域名已接入 <a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare</a> 并可管理 DNS。</li>
+<li>已知你在 Netlify 的站点地址，例如：<code>ice.netlify.app</code>。</li>
+</ul>
+<hr>
+<h2 id="二、在-Netlify-添加自定义域名"><a href="#二、在-Netlify-添加自定义域名" class="headerlink" title="二、在 Netlify 添加自定义域名"></a>二、在 Netlify 添加自定义域名</h2><ol>
+<li>登录 <a target="_blank" rel="noopener" href="https://app.netlify.com/">Netlify 控制台</a>。</li>
+<li>进入你的网站项目。</li>
+<li>点击左侧菜单中的「Domain settings」。</li>
+<li>点击「Add custom domain」。</li>
+<li>输入你要绑定的域名，例如：<code>hey.ice68.cn</code>，点击「Verify」。</li>
+<li>此时会提示你添加一个 <code>netlify-challenge</code> 的 TXT 记录用于验证所有权，<strong>暂时不用理会，直接添加 CNAME 记录即可</strong>。</li>
+</ol>
+<hr>
+<h2 id="三、在-Cloudflare-添加-DNS-记录"><a href="#三、在-Cloudflare-添加-DNS-记录" class="headerlink" title="三、在 Cloudflare 添加 DNS 记录"></a>三、在 Cloudflare 添加 DNS 记录</h2><ol>
+<li><p>登录 <a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare 控制面板</a>。</p>
+</li>
+<li><p>选择你的域名（例如 <code>ice68.cn</code>）。</p>
+</li>
+<li><p>点击左侧导航中的「DNS」。</p>
+</li>
+<li><p>点击「添加记录（Add record）」。</p>
+</li>
+<li><p>填写以下内容：</p>
+<ul>
+<li><strong>类型（Type）</strong>：<code>CNAME</code></li>
+<li><strong>名称（Name）</strong>：<code>hey</code>（即子域名 <code>hey.ice68.cn</code>）</li>
+<li><strong>目标（Target）</strong>：<code>ice.netlify.app</code>（你的 Netlify 子域名）</li>
+<li><strong>代理状态</strong>：关闭（显示灰色云朵，即「DNS only」）</li>
+</ul>
+</li>
+<li><p>保存记录。</p>
+</li>
+</ol>
+<h3 id="可选：添加验证-TXT-记录（如果-Netlify-要求验证所有权）"><a href="#可选：添加验证-TXT-记录（如果-Netlify-要求验证所有权）" class="headerlink" title="可选：添加验证 TXT 记录（如果 Netlify 要求验证所有权）"></a>可选：添加验证 TXT 记录（如果 Netlify 要求验证所有权）</h3><ul>
+<li><strong>类型</strong>：<code>TXT</code></li>
+<li><strong>名称</strong>：<code>netlify-challenge</code></li>
+<li><strong>内容</strong>：Netlify 提供的值，例如 <code>dfsgdfshgrsf</code></li>
+</ul>
+<hr>
+<h2 id="四、等待-DNS-生效并验证"><a href="#四、等待-DNS-生效并验证" class="headerlink" title="四、等待 DNS 生效并验证"></a>四、等待 DNS 生效并验证</h2><ul>
+<li><p>DNS 生效时间通常在几分钟到一小时之间。</p>
+</li>
+<li><p>你可以使用在线工具（如 <a target="_blank" rel="noopener" href="https://toolbox.googleapps.com/apps/dig/">Google DIG 工具</a>）检查：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig hey.ice68.cn CNAME</span><br></pre></td></tr></table></figure></li>
+<li><p>或在终端使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup -<span class="built_in">type</span>=CNAME hey.ice68.cn</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="五、返回-Netlify-完成验证"><a href="#五、返回-Netlify-完成验证" class="headerlink" title="五、返回 Netlify 完成验证"></a>五、返回 Netlify 完成验证</h2><ul>
+<li>回到 Netlify，点击「Verify DNS configuration」按钮。</li>
+<li>如果 CNAME 记录生效，Netlify 会显示绑定成功。</li>
+<li>之后你可以启用 HTTPS（自动配置 SSL&#x2F;TLS 证书）。</li>
+</ul>
+<hr>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>使用 Cloudflare 管理 DNS 而不更换 NS，有如下优点：</p>
+<ul>
+<li>保留 Cloudflare 的 DDoS 防护与缓存服务。</li>
+<li>更灵活地添加自定义记录（如 MX、TXT 等）。</li>
+<li>避免因更换 NS 导致原有配置失效。</li>
+</ul>
+<p>　　只需添加一条 CNAME 记录，就可以顺利将你的自定义域名绑定到 Netlify，省事又安全！</p>
+<hr>
+<p>　　（未经授权，禁止转载）</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover next lx-cover-sm" style="background-image: url(https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/footer-l.min.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2025-06-13_Jealousy_in_Practice/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>我遇到的心魔</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover prev lx-cover-sm" style="background-image: url(https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/footer-r.min.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2025-06-04_net_0/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>☁️云端再起：...</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+  Copyright &copy; 2025.<a href="/">茶花花</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>
+  </div>
+</footer>
+
+</div>
+
+<button class="hamburger hamburger--arrow-r" type="button" title="menu">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+</button>
+<div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/avatar.min.jpeg" alt="小冰同学"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>小冰同学</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/guestbook/">Guestbook</a></li>
+        <li><a href="/about/">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/jquery.easing.min.js"></script>
+<script>
+(function () {
+	"use strict";
+	var goToTop = function() {
+		$(".js-gotop").on("click", function(event){
+			event.preventDefault();
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			return false;
+		});
+		$(window).scroll(function(){
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+		});
+	};
+	$(function(){
+		goToTop();
+	});
+}());
+</script>
+
+
+</body>
+</html>
