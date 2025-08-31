@@ -1,44 +1,77 @@
 /*--put your own style sheet here--*/
 /* 全局字体设置 */
-body {
-  font-size: 17px; /* 字号中等，适合手机阅读 */
-  line-height: 1.75; /* 行高舒适，类似公众号 */
+body,
+.post-content,
+.article-entry {
+  font-size: 18px; /* 字号稍大，更适合手机阅读 */
+  line-height: 1.85; /* 行高更舒适 */
   font-weight: 400; /* 正文字体正常粗细 */
   color: #333; /* 深灰色，比纯黑柔和 */
   word-spacing: 0.05em; /* 字间距微调，更清晰 */
 }
 /* 标题优化 */
-h1,
-h2,
-h3,
+h1 {
+  font-size: 2.2em; /* 一级标题更大 */
+  font-weight: 700; /* 加粗突出 */
+  line-height: 1.3;
+  margin: 1.5em 0 0.8em;
+}
+h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 1.3em 0 0.7em;
+}
+h3 {
+  font-size: 1.5em;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1.1em 0 0.6em;
+}
 h4,
 h5,
 h6 {
-  font-weight: 600; /* 半粗，突出层级 */
-  line-height: 1.4; /* 标题行距紧凑 */
-  margin: 1.2em 0 0.6em; /* 上下留白 */
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 1em 0 0.5em;
 }
 /* 段落优化 */
 p {
-  margin: 0.8em 0; /* 段落间距 */
+  margin: 1em 0; /* 段落间距增加，阅读更舒适 */
+}
+/* 列表优化 */
+ul,
+ol {
+  margin: 1em 0;
+  padding-left: 1.5em;
+  line-height: 1.85;
 }
 /* 代码块字体 */
 code,
 pre {
-  font-size: 15px; /* 稍微小一点，不抢正文风头 */
-  line-height: 1.6;
+  font-size: 16px; /* 稍微大一点 */
+  line-height: 1.65;
   font-family: "Fira Code", monospace;
 }
 /* 手机端适配（屏幕小于768px时） */
 @media screen and (max-width: 768px) {
-  body {
-    font-size: 16px; /* 小屏稍微小一点，避免挤压 */
-    line-height: 1.7;
+  body,
+  .post-content,
+  .article-entry {
+    font-size: 17px; /* 手机端略微缩小，避免挤压 */
+    line-height: 1.8;
   }
   h1 {
-    font-size: 1.6em;
+    font-size: 2em;
   }
   h2 {
-    font-size: 1.4em;
+    font-size: 1.7em;
+  }
+  h3 {
+    font-size: 1.5em;
+  }
+  code,
+  pre {
+    font-size: 15px;
   }
 }
