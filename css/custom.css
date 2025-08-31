@@ -1,77 +1,82 @@
 /*--put your own style sheet here--*/
-/* 全局字体设置 */
+/* ===== 全局字体设置 ===== */
 body,
 .post-content,
 .article-entry {
-  font-size: 18px; /* 字号稍大，更适合手机阅读 */
-  line-height: 1.85; /* 行高更舒适 */
-  font-weight: 400; /* 正文字体正常粗细 */
-  color: #333; /* 深灰色，比纯黑柔和 */
-  word-spacing: 0.05em; /* 字间距微调，更清晰 */
+  font-size: 18px; /* 正文字号 */
+  line-height: 1.85; /* 行高 */
+  font-weight: 400; /* 正文字体粗细 */
+  color: #333; /* 深灰色，更易阅读 */
 }
-/* 标题优化 */
-h1 {
-  font-size: 2.2em; /* 一级标题更大 */
-  font-weight: 700; /* 加粗突出 */
+/* ===== 标题 ===== */
+.post-content h1,
+.article-entry h1 {
+  font-size: 2.2em;
+  font-weight: 700;
   line-height: 1.3;
   margin: 1.5em 0 0.8em;
 }
-h2 {
+.post-content h2,
+.article-entry h2 {
   font-size: 1.8em;
   font-weight: 600;
   line-height: 1.35;
   margin: 1.3em 0 0.7em;
 }
-h3 {
+.post-content h3,
+.article-entry h3 {
   font-size: 1.5em;
   font-weight: 600;
   line-height: 1.4;
   margin: 1.1em 0 0.6em;
 }
-h4,
-h5,
-h6 {
-  font-weight: 600;
-  line-height: 1.4;
-  margin: 1em 0 0.5em;
+/* ===== 段落 ===== */
+.post-content p,
+.article-entry p {
+  margin: 1em 0;
 }
-/* 段落优化 */
-p {
-  margin: 1em 0; /* 段落间距增加，阅读更舒适 */
-}
-/* 列表优化 */
-ul,
-ol {
+/* ===== 列表 ===== */
+.post-content ul,
+.article-entry ul,
+.post-content ol,
+.article-entry ol {
   margin: 1em 0;
   padding-left: 1.5em;
   line-height: 1.85;
 }
-/* 代码块字体 */
-code,
-pre {
-  font-size: 16px; /* 稍微大一点 */
+/* ===== 代码块 ===== */
+.post-content code,
+.post-content pre,
+.article-entry code,
+.article-entry pre {
+  font-size: 16px;
   line-height: 1.65;
   font-family: "Fira Code", monospace;
 }
-/* 手机端适配（屏幕小于768px时） */
+/* ===== 手机端适配 ===== */
 @media screen and (max-width: 768px) {
   body,
   .post-content,
   .article-entry {
-    font-size: 17px; /* 手机端略微缩小，避免挤压 */
+    font-size: 17px;
     line-height: 1.8;
   }
-  h1 {
+  .post-content h1,
+  .article-entry h1 {
     font-size: 2em;
   }
-  h2 {
+  .post-content h2,
+  .article-entry h2 {
     font-size: 1.7em;
   }
-  h3 {
+  .post-content h3,
+  .article-entry h3 {
     font-size: 1.5em;
   }
-  code,
-  pre {
+  .post-content code,
+  .post-content pre,
+  .article-entry code,
+  .article-entry pre {
     font-size: 15px;
   }
 }
