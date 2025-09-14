@@ -203,8 +203,8 @@ blockquote {
 /* =========================
    文章段落首行缩进
    ========================= */
-.lx-post p,
-.post-list p {
+.lx-post p:not(:has(img)),
+.post-list p:not(:has(img)) {
   font-size: inherit;
   line-height: inherit;
   letter-spacing: inherit;
